@@ -14,12 +14,16 @@ namespace EscapeGame {
             EquipedItems[ItemType.Shoulder] = null;
             EquipedItems[ItemType.Gloves] = null;
             EquipedItems[ItemType.Boots] = null;
-            EquipedItems[ItemType.Lantern] = null;
+            EquipedItems[ItemType.Light] = null;
             EquipedItems[ItemType.Sword] = null;
         }
 
         public void AddItem(Item item) {
             Items[item.ID] = item;
+        }
+
+        public int GetLightStat() {
+            return (EquipedItems[ItemType.Light] == null) ? 3 : 3 + EquipedItems[ItemType.Light].Stat;
         }
 
         public void EquipItem(Item item) {

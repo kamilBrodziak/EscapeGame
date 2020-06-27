@@ -1,0 +1,62 @@
+0;sword;2;Old rusted sword
+1;sword;8;Long knife
+2;sword;10;Forsaken Sword
+3;sword;15;Longsword
+4;sword;21;Deargstalker Shortsword
+5;sword;26;Well-Used Sword
+6;sword;40;Icy Ebon Warblade
+7;sword;4;Felguard Axe
+8;sword;10;Double Axe
+9;sword;14;Razor Hill Axe
+10;sword;19;Sharp Axe
+11;sword;21;Arcane Forged Axe
+12;sword;25;Stormwind Vanguar Warsword
+13;sword;30;Warsword of the Horde Vanguard
+14;sword;34;Axe of Eclipse
+15;chest;1;Battlelord's Chestplate
+16;chest;3;Felforged Chestplate
+17;chest;5;Gutcrusher Chestplate
+18;chest;9;Plainsthunder Chestplate
+19;chest;13;Gravewalker's Chestplate
+20;chest;15;Netherforce Chestplate
+21;chest;20;Cold-Forged Chestplate
+22;chest;23;Deathbone Chestplate
+23;boots;1;Battlelord's Warboots
+24;boots;2;Combatant's Plate Warboots
+25;boots;3;Leystone Boots
+26;boots;5;Felforged Warboots
+27;boots;8;Thunderpeak Greatboots
+28;boots;10;Plate Hiking Boots
+29;boots;13;Sunsoul Boots
+30;boots;15;Stonestep Boots
+31;gloves;1;Gauntlets of Outrage
+32;gloves;2;Blood-Spatteres Gauntlets
+33;gloves;3;Voidclaw Gauntlates
+34;gloves;4;Rumblestone Gauntlates
+35;gloves;5;Deathlord's Gauntlates
+36;gloves;8;Gauntlates of the Silver Hand
+37;gloves;10;Earthguard Gaunlates
+38;gloves;15;Leystone Gauntlets
+39;gloves;17;Felforged Gauntlates
+40;helmet;1;Felforged Helmet
+41;helmet;2;Rooksguard Helmet
+42;helmet;3;Sea Rider's Helmet
+43;helmet;4;Rastari Helmet
+44;helmet;5;Honored Viking Helmet
+45;helmet;6;Deathlord's Helm
+46;helmet;8;Leystone Helm
+47;helmet;10;Sunsoul Helm
+48;helmet;12;Heart-Lesion Helm
+49;helmet;15;Blackrock Greathelm
+50;shoulder;2;Twilight-Heart Shoulderplates
+51;shoulder;3;Stalwart Shoulderpads
+52;shoulder;4;Nightsfall Shoulderplates
+53;shoulder;5;Blacksteel Shoulderplates
+54;shoulder;6;Darkfallem Shoulderplates
+55;shoulder;8;Reconstructed Holy Shoulderplates
+56;shoulder;9;Reconstructed Furious Shoulderplates
+57;shoulder;10;Reconstructed Bloody Shoulderplates
+58;light;8;lanthern
+59;light;15;torch
+60;light;25;flashlight
+61;light;2;lighter

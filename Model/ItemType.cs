@@ -6,7 +6,7 @@ namespace EscapeGame {
         Shoulder,
         Gloves,
         Boots,
-        Lantern,
+        Light,
         Sword
     }
 }

@@ -1,51 +1,55 @@
+using EscapeGame.Controller;
 using System;
+using System.Collections.Generic;
 
 namespace EscapeGame {
 
     class GameController {
-        public Map Map { get; set; }
-        public Player Player { get; set; }
+        public MapController MapController { get; set; }
+        public PlayerController PlayerController { get; set; }
+        private ItemsController itemsController;
 
         public GameController() {
-            Map = new Map(1);
+            MapController = new MapController();
+            itemsController = new ItemsController();
+            PlayerController = new PlayerController();
         }
 
         public bool Launch() {
             ConsoleKey key;
-            Player = new Player();
-            int radius = 13;
-            int newPlayerPosX, newPlayerPosY;
-            Map.RenderMap(playerPosX, playerPosY, radius);
+            int newPlayerPosX, newPlayerPosY, playerPosX, playerPosY;
+            MapController.RenderMap(PlayerController.Player);
             while (!(key = Console.ReadKey().Key).Equals(ConsoleKey.Escape)) {
-                newPlayerPosX = Player.PosX;
-                newPlayerPosY = Player.PosY;
+                playerPosX = PlayerController.Player.PosX;
+                playerPosY = PlayerController.Player.PosY;
+                newPlayerPosX = playerPosX;
+                newPlayerPosY = playerPosY;
                 switch(key) {
                     case ConsoleKey.LeftArrow:
-                        if(Map.isFreeChunk(Player.PosX - 1, Player.PosY)) {
+                        if(MapController.isFreeChunk(playerPosX - 1, playerPosY)) {
                             newPlayerPosX--;
                         }
                         break;
                     case ConsoleKey.RightArrow:
-                        if (Map.isFreeChunk(Player.PosX + 1, Player.PosY)) {
+                        if (MapController.isFreeChunk(playerPosX + 1, playerPosY)) {
                             newPlayerPosX++;
                         }
                         break;
                     case ConsoleKey.UpArrow:
-                        if (Map.isFreeChunk(Player.PosX, Player.PosY - 1)) {
+                        if (MapController.isFreeChunk(playerPosX, playerPosY - 1)) {
                             newPlayerPosY--;
                         }
                         break;
                     case ConsoleKey.DownArrow:
-                        if (Map.isFreeChunk(Player.PosX, Player.PosY + 1)) {
+                        if (MapController.isFreeChunk(playerPosX, playerPosY + 1)) {
                             newPlayerPosY++;
                         }
                         break;
                 }
 
-                if(newPlayerPosX != Player.PosX || newPlayerPosY != Player.PosY) {
-                    Player.PosX = newPlayerPosX;
-                    Player.PosY = newPlayerPosY;
-                    Map.RenderMap(Player.PosX, Player.PosY, radius);
+                bool playerMoved = PlayerController.MakeMove(newPlayerPosX, newPlayerPosY);
+                if(playerMoved) {
+                    MapController.RenderMap(PlayerController.Player);
                 }
             }
             return false;
