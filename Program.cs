@@ -3,7 +3,8 @@
 namespace EscapeGame {
     class Program {
         static void Main(string[] args) {
-            Console.WriteLine("Hello World!");
+            MainController mainController = new MainController();
+            mainController.Launch();
         }
     }
 }

@@ -1,9 +1,14 @@
-class GameController {
+namespace EscapeGame {
 
-    public GameController() {
-        
+    class GameController {
+        public Menu MenuView {
+            get; set;
+        }
+
+        public GameController() {
+            MenuView = new Menu();
+        }
+
+
     }
-
-    
-
 }
