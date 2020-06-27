@@ -4,6 +4,7 @@ namespace EscapeGame {
 
     class GameController {
         public Map Map { get; set; }
+        public Player Player { get; set; }
 
         public GameController() {
             Map = new Map(1);
@@ -11,40 +12,40 @@ namespace EscapeGame {
 
         public bool Launch() {
             ConsoleKey key;
+            Player = new Player();
             int radius = 13;
-            int playerPosX = 3, playerPosY = 3, newPlayerPosX, newPlayerPosY;
+            int newPlayerPosX, newPlayerPosY;
             Map.RenderMap(playerPosX, playerPosY, radius);
             while (!(key = Console.ReadKey().Key).Equals(ConsoleKey.Escape)) {
-                newPlayerPosX = playerPosX;
-                newPlayerPosY = playerPosY;
+                newPlayerPosX = Player.PosX;
+                newPlayerPosY = Player.PosY;
                 switch(key) {
-                    
                     case ConsoleKey.LeftArrow:
-                        if(Map.isFreeChunk(playerPosX - 1, playerPosY)) {
+                        if(Map.isFreeChunk(Player.PosX - 1, Player.PosY)) {
                             newPlayerPosX--;
                         }
                         break;
                     case ConsoleKey.RightArrow:
-                        if (Map.isFreeChunk(playerPosX + 1, playerPosY)) {
+                        if (Map.isFreeChunk(Player.PosX + 1, Player.PosY)) {
                             newPlayerPosX++;
                         }
                         break;
                     case ConsoleKey.UpArrow:
-                        if (Map.isFreeChunk(playerPosX, playerPosY - 1)) {
+                        if (Map.isFreeChunk(Player.PosX, Player.PosY - 1)) {
                             newPlayerPosY--;
                         }
                         break;
                     case ConsoleKey.DownArrow:
-                        if (Map.isFreeChunk(playerPosX, playerPosY + 1)) {
+                        if (Map.isFreeChunk(Player.PosX, Player.PosY + 1)) {
                             newPlayerPosY++;
                         }
                         break;
                 }
 
-                if(newPlayerPosX != playerPosX || newPlayerPosY != playerPosY) {
-                    playerPosX = newPlayerPosX;
-                    playerPosY = newPlayerPosY;
-                    Map.RenderMap(playerPosX, playerPosY, radius);
+                if(newPlayerPosX != Player.PosX || newPlayerPosY != Player.PosY) {
+                    Player.PosX = newPlayerPosX;
+                    Player.PosY = newPlayerPosY;
+                    Map.RenderMap(Player.PosX, Player.PosY, radius);
                 }
             }
             return false;
