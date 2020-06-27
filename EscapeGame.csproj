@@ -48,12 +48,16 @@
     <Content Include=".idea\modules.xml" />
     <Content Include=".idea\vcs.xml" />
     <Content Include=".idea\workspace.xml" />
+    <Content Include="View\files\map1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\Item.cs" />
+    <Compile Include="Model\ChunkType.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Stats.cs" />
     <Compile Include="Program.cs" />

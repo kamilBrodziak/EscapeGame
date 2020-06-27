@@ -28,7 +28,8 @@ namespace EscapeGame {
 
             switch(chosenOption) {
                 case 0:
-                    
+                    GameController gameController = new GameController();
+                    gameController.Launch();
                     break;
                 case 1:
 
