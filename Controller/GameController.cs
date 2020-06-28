@@ -5,51 +5,63 @@ using System.Collections.Generic;
 namespace EscapeGame {
 
     class GameController {
-        public MapController MapController { get; set; }
-        public PlayerController PlayerController { get; set; }
+        private MapController mapController;
+        private PlayerController playerController;
         private ItemsController itemsController;
+        private InventoryController inventoryController;
 
         public GameController() {
-            MapController = new MapController();
+            mapController = new MapController();
             itemsController = new ItemsController();
-            PlayerController = new PlayerController();
+            playerController = new PlayerController();
+            inventoryController = new InventoryController(playerController.Player.Inventory);
         }
 
         public bool Launch() {
             ConsoleKey key;
-            int newPlayerPosX, newPlayerPosY, playerPosX, playerPosY;
-            MapController.RenderMap(PlayerController.Player);
+            int playerPosX, playerPosY, newPlayerPosX, newPlayerPosY;
+            mapController.RenderMap(playerController.Player);
             while (!(key = Console.ReadKey().Key).Equals(ConsoleKey.Escape)) {
-                playerPosX = PlayerController.Player.PosX;
-                playerPosY = PlayerController.Player.PosY;
+                playerPosX = playerController.Player.PosX;
+                playerPosY = playerController.Player.PosY;
                 newPlayerPosX = playerPosX;
                 newPlayerPosY = playerPosY;
+                bool renderMap = true;
+
                 switch(key) {
                     case ConsoleKey.LeftArrow:
-                        if(MapController.isFreeChunk(playerPosX - 1, playerPosY)) {
-                            newPlayerPosX--;
-                        }
+                        newPlayerPosX--;
                         break;
                     case ConsoleKey.RightArrow:
-                        if (MapController.isFreeChunk(playerPosX + 1, playerPosY)) {
-                            newPlayerPosX++;
-                        }
+                        newPlayerPosX++;
                         break;
                     case ConsoleKey.UpArrow:
-                        if (MapController.isFreeChunk(playerPosX, playerPosY - 1)) {
-                            newPlayerPosY--;
-                        }
+                        newPlayerPosY--;
                         break;
                     case ConsoleKey.DownArrow:
-                        if (MapController.isFreeChunk(playerPosX, playerPosY + 1)) {
-                            newPlayerPosY++;
-                        }
+                        newPlayerPosY++;
+                        break;
+                    case ConsoleKey.I:
+                        inventoryController.OpenInventory();
+                        break;
+                    default:
+                        renderMap = false;
                         break;
                 }
-
-                bool playerMoved = PlayerController.MakeMove(newPlayerPosX, newPlayerPosY);
-                if(playerMoved) {
-                    MapController.RenderMap(PlayerController.Player);
+                
+                if(newPlayerPosX != playerPosX || newPlayerPosY != playerPosY) {
+                    if(mapController.IsFreeChunk(newPlayerPosX, newPlayerPosY)) {
+                        playerController.MakeMove(newPlayerPosX, newPlayerPosY);
+                    } else if(mapController.IsItemBoxChunk(newPlayerPosX, newPlayerPosY)) {
+                        playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
+                        playerController.MakeMove(newPlayerPosX, newPlayerPosY);
+                        mapController.SetChunk(newPlayerPosX, newPlayerPosY, ChunkType.Floor);
+                    } else {
+                        renderMap = false;
+                    }
+                }
+                if(renderMap) {
+                    mapController.RenderMap(playerController.Player);
                 }
             }
             return false;

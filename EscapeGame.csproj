@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\GameController.cs" />
+    <Compile Include="Controller\InventoryController.cs" />
     <Compile Include="Controller\ItemsController.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Controller\MapController.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="Model\ChunkType.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="View\Inventory.cs" />
+    <Compile Include="View\InventoryView.cs" />
     <Compile Include="View\MapView.cs" />
     <Compile Include="View\Menu.cs" />
     <Compile Include="View\Stats.cs" />

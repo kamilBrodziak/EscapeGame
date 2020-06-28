@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -31,6 +32,7 @@ namespace EscapeGame {
                 Items.Add(EquipedItems[item.Type].ID, EquipedItems[item.Type]);
             }
             Items.Remove(item.ID);
+            Console.WriteLine(item.Type);
             EquipedItems[item.Type] = item;
         }
     }

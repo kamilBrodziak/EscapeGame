@@ -12,8 +12,12 @@ namespace EscapeGame {
             LoadMap();
         }
 
-        public bool isFreeChunk(int x, int y) {
+        public bool IsFreeChunk(int x, int y) {
             return MapChunks[y][x].Equals(ChunkType.Floor);
+        }
+
+        public bool IsItemBoxChunk(int x, int y) {
+            return MapChunks[y][x].Equals(ChunkType.Itembox);
         }
 
         public void LoadMap() {

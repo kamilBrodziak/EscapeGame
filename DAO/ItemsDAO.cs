@@ -12,7 +12,7 @@ namespace EscapeGame {
                 string[] properties = line.Split(';');
                 int id = int.Parse(properties[0]);
                 ItemType type;
-                switch (properties[0]) {
+                switch (properties[1]) {
                     case "helmet":
                         type = ItemType.Helmet;
                         break;
