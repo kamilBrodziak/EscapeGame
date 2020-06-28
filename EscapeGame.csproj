@@ -63,6 +63,7 @@
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Controller\InventoryController.cs" />
     <Compile Include="Controller\ItemsController.cs" />
+    <Compile Include="Controller\LevelGamesController.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Controller\MapController.cs" />
     <Compile Include="Controller\OpponentController.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="View\FightView.cs" />
     <Compile Include="View\InventoryView.cs" />
+    <Compile Include="View\LevelGamesView.cs" />
     <Compile Include="View\MapView.cs" />
     <Compile Include="View\Menu.cs" />
     <Compile Include="View\Stats.cs" />
