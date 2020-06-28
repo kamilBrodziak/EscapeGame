@@ -26,13 +26,21 @@ namespace EscapeGame.Controller {
             levelGamesView.PrintHotNColdEntrance();
             Random rnd = new Random();
             int number = rnd.Next(0, 100);
+            string userInput;
             for(int i = 1; i <= 5; ++i) {
-                if(levelGamesView.GetUserInput() != $"{number}") {
-                    levelGamesView.PrintHotNColdWrongAnswer(5 - i);
+                userInput = levelGamesView.GetUserInput();
+                int guessedNumber;
+                if(int.TryParse(userInput, out guessedNumber)) {
+                    if (guessedNumber != number) {
+                        levelGamesView.PrintHotNColdWrongAnswer(5 - i, guessedNumber, number);
+                    } else {
+                        levelGamesView.PrintHotNColdResult(true);
+                        return true;
+                    }
                 } else {
-                    levelGamesView.PrintHotNColdResult(true);
-                    return true;
+                    levelGamesView.PrintHotNColdWrongAnswer(5 - i, -1000, number);
                 }
+                
             }
             levelGamesView.PrintHotNColdResult(false);
             return false;
@@ -43,18 +51,20 @@ namespace EscapeGame.Controller {
             List<int> availableMoves = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
             levelGamesView.PrintTicTacToeEntrance();
             for(int i = 0; i < moves.Length; ++i) {
+                System.Threading.Thread.Sleep(2000);
                 int playerChoose = 0;
                 bool isPlayerTurn = i % 2 == 0;
-                if(isPlayerTurn) {
+                levelGamesView.PrintTicTacToe(moves, availableMoves[playerChoose], isPlayerTurn);
+                if (isPlayerTurn) {
                     ConsoleKey key;
                     while(!(key = levelGamesView.GetUserKeyInput()).Equals(ConsoleKey.Enter)) {
                         if(key == ConsoleKey.LeftArrow || key == ConsoleKey.RightArrow) {
                             if (key == ConsoleKey.LeftArrow) {
-                                playerChoose = playerChoose - 1 > 0 ? playerChoose - 1 : availableMoves.Count - 1;
+                                playerChoose = playerChoose - 1 >= 0 ? playerChoose - 1 : availableMoves.Count - 1;
                             } else if (key == ConsoleKey.RightArrow) {
                                 playerChoose = playerChoose + 1 < availableMoves.Count ? playerChoose + 1 : 0;
                             }
-                            levelGamesView.PrintTicTacToeTable(moves, availableMoves[playerChoose]);
+                            levelGamesView.PrintTicTacToe(moves, availableMoves[playerChoose], isPlayerTurn);
                         }
                     }
 
@@ -63,9 +73,9 @@ namespace EscapeGame.Controller {
                     playerChoose = rnd.Next(0, availableMoves.Count);
                 }
                 moves[availableMoves[playerChoose]] = isPlayerTurn ? 'X' : 'O';
-                availableMoves.RemoveAt(playerChoose);
                 if(CheckIfWin(moves)) {
-                    if(isPlayerTurn) {
+                    levelGamesView.PrintTicTacToe(moves, availableMoves[playerChoose], isPlayerTurn);
+                    if (isPlayerTurn) {
                         levelGamesView.PrintTicTacToeResult("win");
                         return true;
                     } else {
@@ -73,6 +83,7 @@ namespace EscapeGame.Controller {
                         return false;
                     }
                 }
+                availableMoves.RemoveAt(playerChoose);
             }
             levelGamesView.PrintTicTacToeResult("tie");
             return false;

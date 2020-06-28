@@ -9,11 +9,13 @@ namespace EscapeGame {
         private ItemsController itemsController;
         private InventoryController inventoryController;
         private FightController fightController;
+        private LevelGamesController levelGamesController;
         private int level;
 
         public GameController() {
             level = 0;
             mapController = new MapController(level);
+            levelGamesController = new LevelGamesController();
             itemsController = new ItemsController();
             playerController = new PlayerController();
             inventoryController = new InventoryController(playerController.Player.Inventory);
@@ -48,6 +50,9 @@ namespace EscapeGame {
                     case ConsoleKey.I:
                         inventoryController.OpenInventory(playerController);
                         break;
+                    case ConsoleKey.D9:
+                        Cheat();
+                        break;
                     default:
                         renderMap = false;
                         break;
@@ -67,7 +72,7 @@ namespace EscapeGame {
                             playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
                             mapController.SetChunk(newPlayerPosX, newPlayerPosY, ChunkType.Floor);
                         } else {
-
+                            
                         }
                         playerController.Player.Health = 100;
                     } else if (mapController.IsBossChunk(newPlayerPosX, newPlayerPosY)) {
@@ -84,9 +89,16 @@ namespace EscapeGame {
                         }
                     } else if (mapController.IsGateChunk(newPlayerPosX, newPlayerPosY)) {
                         if(playerController.HasKey()) {
-                            
+                            playerController.KeyUsed();
+                            bool canPass = levelGamesController.RunMiniGame(level);
+                            if(canPass) {
+                                mapController.LoadMap(++level);
+                                playerController.Player.PosX = 3;
+                                playerController.Player.PosY = 3;
+                            }
                         } else {
                             Console.WriteLine("You don't have a key! Defeat boss to aquire it.");
+                            System.Threading.Thread.Sleep(1000);
                         }
                     } else {
                         renderMap = false;
@@ -97,6 +109,17 @@ namespace EscapeGame {
                 }
             }
             return false;
+        }
+
+        public void Cheat() {
+            playerController.Player.Health = 1000;
+            playerController.Player.BaseAttack = 1000;
+            playerController.Player.BaseDefence = 1000;
+            playerController.Player.BaseVisibility = 1000;
+            playerController.KeyAquired();
+            playerController.CalculateAttack();
+            playerController.CalculateDefence();
+            playerController.CalculateVisibility();
         }
 
     }

@@ -40,7 +40,7 @@ namespace EscapeGame {
         }
 
         public void RenderMap(Player player) {
-            mapView.RenderMap(player.PosX, player.PosY, player.Inventory.GetLightStat(), MapChunks);
+            mapView.RenderMap(player.PosX, player.PosY, player.Visibility, MapChunks);
         }
 
         public ChunkType GetChunk(int x, int y) {

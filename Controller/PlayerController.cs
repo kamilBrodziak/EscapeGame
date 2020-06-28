@@ -31,8 +31,9 @@ namespace EscapeGame {
         }
 
         public void CalculateAttack() {
-            if(Player.Inventory.EquipedItems[ItemType.Sword] != null) {
-                Player.Attack = Player.BaseAttack + Player.Inventory.EquipedItems[ItemType.Sword].Stat;
+            Player.Attack = Player.BaseAttack;
+            if (Player.Inventory.EquipedItems[ItemType.Sword] != null) {
+                Player.Attack += Player.Inventory.EquipedItems[ItemType.Sword].Stat;
             }
         }
 
@@ -56,8 +57,9 @@ namespace EscapeGame {
         }
 
         public void CalculateVisibility() {
+            Player.Visibility = Player.BaseVisibility;
             if (Player.Inventory.EquipedItems[ItemType.Light] != null) {
-                Player.Visibility = Player.BaseVisibility + Player.Inventory.EquipedItems[ItemType.Light].Stat;
+                Player.Visibility += Player.Inventory.EquipedItems[ItemType.Light].Stat;
             }
         } 
         public bool MakeMove(int posX, int posY) {

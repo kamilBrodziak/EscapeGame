@@ -22,6 +22,9 @@ namespace EscapeGame {
             BaseVisibility = 5;
             BaseAttack = 10;
             BaseDefence = 5;
+            Visibility = BaseVisibility;
+            Attack = BaseAttack;
+            Defence = BaseDefence;
             PosX = 3;
             PosY = 3;
             Inventory = new Inventory();

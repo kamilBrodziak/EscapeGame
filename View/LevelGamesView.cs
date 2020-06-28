@@ -14,6 +14,8 @@ namespace EscapeGame.View {
         //
         // HOT N COLD MINI GAME
         //
+
+
         public void PrintHotNColdEntrance() {
             Console.Clear();
             Console.WriteLine("Hello, I am nameless AI who trapped you here.");
@@ -22,8 +24,22 @@ namespace EscapeGame.View {
             Console.WriteLine("What number is it? You have 5 tries to guess");
         }
 
-        public void PrintHotNColdWrongAnswer(int triesLeft) {
-            Console.WriteLine($"Wrong! Try again, you have {triesLeft} tries left");
+        public void PrintHotNColdWrongAnswer(int triesLeft, int guessNumber, int correctNumber) {
+            string coldMeter = "Frozing";
+            int diff = Math.Abs(correctNumber - guessNumber);
+            if (diff < 2 ) {
+                coldMeter = "Burns!";
+            } else if(diff < 5) {
+                coldMeter = "Hot!";
+            } else if(diff < 10) {
+                coldMeter = "Warm!";
+            } else if(diff < 15) {
+                coldMeter = "Cold!";
+            } else if(diff < 20) {
+                coldMeter = "Very Cold!";
+            }
+            Console.WriteLine($"{coldMeter}! Try again, you have {triesLeft} tries left");
+
         }
 
         public void PrintHotNColdResult(bool playerWon) {
@@ -40,7 +56,13 @@ namespace EscapeGame.View {
         // TIC TAC TOE MINI GAME
         //
 
+        public void PrintTicTacToe(char[] moves, int playerMove, bool isPlayerTurn) {
+            Console.Clear();
+            PrintTicTacToeEntrance();
+            PrintTicTacToeTable(moves, playerMove, isPlayerTurn);
+        }
         public void PrintTicTacToeEntrance() {
+            Console.Clear();
             Console.WriteLine("Hello again my dear!");
             Console.WriteLine("You are doing really really great!");
             Console.WriteLine("But you are sooooo slow.. I am bored again!");
@@ -48,31 +70,34 @@ namespace EscapeGame.View {
             Console.WriteLine("Use left/right arrow to choose your move and hit enter when you want to make that move!");
         }
 
-        public void PrintTicTacToeTable(char[] moves, int playerMove) {
+        public void PrintTicTacToeTable(char[] moves, int playerMove, bool isPlayerTurn) {
             string[] empty = "          ;          ;          ;          ;          ;          ;          ;          ".Split(';');
             string[] x = "XX      XX; XX    XX ;  XX  XX  ;   XXXX   ;   XXXX   ;  XX  XX  ; XX    XX ;XX      XX".Split(';');
-            string[] o = "  OOOOOO  ; OO    OO ;OO      OO;OO      OO;OO      OO;OO      OO; OO    OO ;  OOOOOO  ".Split('\n');
+            string[] o = "  OOOOOO  ; OO    OO ;OO      OO;OO      OO;OO      OO;OO      OO; OO    OO ;  OOOOOO  ".Split(';');
             Console.WriteLine(new String('█', 34));
             for (int i = 0; i < 3; ++i) {
                 for(int j = 0; j < empty.Length; ++j) {
                     Console.Write('█');
                     for(int k = 0; k < 3; ++k) {
                         if (moves[i*3 + k] == ' ') {
-                            if(i*3 + k == playerMove) {
-                                Console.WriteLine(x[j]);
+                            if(i*3 + k == playerMove && isPlayerTurn) {
+                                Console.Write(x[j]);
                             } else {
-                                Console.WriteLine(empty[j]);
+                                Console.Write(empty[j]);
                             }
                         } else if (moves[i*3 +k] == 'X') {
-                            Console.WriteLine(x[j]);
+                            Console.Write(x[j]);
                         } else if (moves[i*3 + k] == 'O') {
-                            Console.WriteLine(o[j]);
+                            Console.Write(o[j]);
                         }
                         Console.Write('█');
                     }
                     Console.WriteLine();
                 }
                 Console.WriteLine(new String('█', 34));
+            }
+            if (!isPlayerTurn) {
+                Console.WriteLine("Now it's my turn, be afraid HA HA HA!");
             }
         }
 
