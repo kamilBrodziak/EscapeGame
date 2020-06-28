@@ -1,6 +1,7 @@
 ﻿
 using EscapeGame.View;
 using System;
+using System.Collections.Generic;
 
 namespace EscapeGame.Controller {
     class LevelGamesController {
@@ -38,10 +39,71 @@ namespace EscapeGame.Controller {
         }
 
         public bool TicTacToe() {
-            int[] moves = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            //levelGamesView.Print
+            char[] moves = new char[9] { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' };
+            List<int> availableMoves = new List<int>() { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+            levelGamesView.PrintTicTacToeEntrance();
+            for(int i = 0; i < moves.Length; ++i) {
+                int playerChoose = 0;
+                bool isPlayerTurn = i % 2 == 0;
+                if(isPlayerTurn) {
+                    ConsoleKey key;
+                    while(!(key = levelGamesView.GetUserKeyInput()).Equals(ConsoleKey.Enter)) {
+                        if(key == ConsoleKey.LeftArrow || key == ConsoleKey.RightArrow) {
+                            if (key == ConsoleKey.LeftArrow) {
+                                playerChoose = playerChoose - 1 > 0 ? playerChoose - 1 : availableMoves.Count - 1;
+                            } else if (key == ConsoleKey.RightArrow) {
+                                playerChoose = playerChoose + 1 < availableMoves.Count ? playerChoose + 1 : 0;
+                            }
+                            levelGamesView.PrintTicTacToeTable(moves, availableMoves[playerChoose]);
+                        }
+                    }
+
+                } else {
+                    Random rnd = new Random();
+                    playerChoose = rnd.Next(0, availableMoves.Count);
+                }
+                moves[availableMoves[playerChoose]] = isPlayerTurn ? 'X' : 'O';
+                availableMoves.RemoveAt(playerChoose);
+                if(CheckIfWin(moves)) {
+                    if(isPlayerTurn) {
+                        levelGamesView.PrintTicTacToeResult("win");
+                        return true;
+                    } else {
+                        levelGamesView.PrintTicTacToeResult("lost");
+                        return false;
+                    }
+                }
+            }
+            levelGamesView.PrintTicTacToeResult("tie");
             return false;
         }
+
+        private bool CheckIfWin(char[] moves) {
+            int[][] movesToCheck = new int[8][] {
+                new int[3]{0, 2, 1 }, new int[3]{3, 5, 1 }, new int[3]{6, 8, 1 }, // on X axis
+                new int[3]{0, 6, 3 }, new int[3]{1, 7, 3 }, new int[3]{2, 8, 3 }, // on Y axis
+                new int[3]{0, 8, 4 }, new int[3]{2, 6, 2 } // diagonals
+            };
+            for (int i = 0; i < movesToCheck.Length; ++i) {
+                if (CheckMoves(moves, movesToCheck[i][0], movesToCheck[i][1], movesToCheck[i][2])) 
+                    return true;
+            }
+            return false;
+        }
+
+        private bool CheckMoves(char[] moves, int iterationStart, int maxLength, int iterationStep) {
+            int x = 0, y = 0;
+            for (int i = iterationStart; i <= maxLength; i += iterationStep) {
+                if(moves[i] == 'X') {
+                    x++;
+                } else if(moves[i] == 'O') {
+                    y++;
+                }
+            }
+
+            return x == 3 || y == 3;
+        }
+
 
         public bool Hangman() {
             return false;
