@@ -48,28 +48,38 @@
     <Content Include=".idea\modules.xml" />
     <Content Include=".idea\vcs.xml" />
     <Content Include=".idea\workspace.xml" />
-    <Content Include="View\files\items.txt">
+    <Content Include="files\questions.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="View\files\map1.txt">
+    <Content Include="files\items.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\map1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\FightController.cs" />
     <Compile Include="Controller\GameController.cs" />
     <Compile Include="Controller\InventoryController.cs" />
     <Compile Include="Controller\ItemsController.cs" />
     <Compile Include="Controller\MainController.cs" />
     <Compile Include="Controller\MapController.cs" />
+    <Compile Include="Controller\OpponentController.cs" />
     <Compile Include="Controller\PlayerController.cs" />
+    <Compile Include="Controller\QuestionController.cs" />
     <Compile Include="DAO\ItemsDAO.cs" />
     <Compile Include="DAO\MapDao.cs" />
+    <Compile Include="DAO\QuestionsDao.cs" />
     <Compile Include="Model\ItemType.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\Item.cs" />
     <Compile Include="Model\ChunkType.cs" />
+    <Compile Include="Model\Opponent.cs" />
     <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\Question.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="View\FightView.cs" />
     <Compile Include="View\InventoryView.cs" />
     <Compile Include="View\MapView.cs" />
     <Compile Include="View\Menu.cs" />

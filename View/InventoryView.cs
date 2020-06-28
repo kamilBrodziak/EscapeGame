@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace EscapeGame.View {
     public class InventoryView {
         public void printInventory(Dictionary<ItemType, Item> equiped, Item[] items, bool hasKey,
-            int baseDefence, int baseAttack, int baseVisibility, int cursorPos) {
+            Player player, int cursorPos) {
             Console.Clear();
             int helmet = equiped[ItemType.Helmet] != null ? equiped[ItemType.Helmet].Stat : 0;
             int shoulder = equiped[ItemType.Shoulder] != null ? equiped[ItemType.Shoulder].Stat : 0;
@@ -13,9 +13,6 @@ namespace EscapeGame.View {
             int boots = equiped[ItemType.Boots] != null ? equiped[ItemType.Boots].Stat : 0;
             int sword = equiped[ItemType.Sword] != null ? equiped[ItemType.Sword].Stat : 0;
             int light = equiped[ItemType.Light] != null ? equiped[ItemType.Light].Stat : 0;
-            int defence = helmet + shoulder + gloves + chest + boots + baseDefence;
-            int attack = sword + baseAttack;
-            int visiblity = light + baseVisibility;
             string helmetStr = $" Helmet: {helmet} ",
                 shoulderStr = $" Shoulder: {shoulder} ",
                 glovesStr = $" Gloves: {gloves} ",
@@ -23,9 +20,9 @@ namespace EscapeGame.View {
                 bootsStr = $" Boots: {boots} ",
                 swordStr = $" Sword: {sword} ",
                 lightStr = $" Light: {light} ",
-                defenceStr = $" Defence: {defence} ",
-                attackStr = $" Attack: {attack} ",
-                visibilityStr = $" Visibility: {visiblity} ",
+                defenceStr = $" Defence: {player.Defence} ",
+                attackStr = $" Attack: {player.Attack} ",
+                visibilityStr = $" Visibility: {player.Visibility} ",
                 hasKeyStr = $" Key: {hasKey}";
 
             Console.WriteLine(new String('█', 100));

@@ -14,14 +14,14 @@ namespace EscapeGame.Controller {
             inventoryView = new InventoryView();
         }
 
-        public void OpenInventory() {
+        public void OpenInventory(PlayerController playerController) {
             ConsoleKey key;
             int cursorPos = 0;
             bool printInv = true;
             List<Item> items = inventory.Items.Values.ToList();
             Item[] itemsToPrint = items.Take(Math.Min(items.Count, printItemCount)).ToArray();
             inventoryView.printInventory(inventory.EquipedItems, itemsToPrint, inventory.HasKey,
-                        10, 10, 5, Math.Min(cursorPos, printItemCount - 1));
+                        playerController.Player, Math.Min(cursorPos, printItemCount - 1));
             while (!(key = Console.ReadKey().Key).Equals(ConsoleKey.I)) {
                 printInv = true;
                 switch (key) {
@@ -32,7 +32,15 @@ namespace EscapeGame.Controller {
                         cursorPos = changeCursorPos(++cursorPos);
                         break;
                     case ConsoleKey.Enter:
-                        inventory.EquipItem(items[cursorPos]);
+                        Item item = items[cursorPos];
+                        inventory.EquipItem(item);
+                        if(item.Type == ItemType.Light) {
+                            playerController.CalculateVisibility();
+                        } else if(item.Type == ItemType.Sword) {
+                            playerController.CalculateAttack();
+                        } else {
+                            playerController.CalculateDefence();
+                        }
                         items = inventory.Items.Values.ToList();
                         if (inventory.Items.Count == cursorPos) {
                             cursorPos--;
@@ -49,7 +57,7 @@ namespace EscapeGame.Controller {
                         itemsToPrint = items.Take(printItemCount).ToArray();
                     }
                     inventoryView.printInventory(inventory.EquipedItems, itemsToPrint, inventory.HasKey,
-                        10, 10, 5, Math.Min(cursorPos, printItemCount - 1));
+                        playerController.Player, Math.Min(cursorPos, printItemCount - 1));
                 }
             }
 

@@ -5,7 +5,7 @@ namespace EscapeGame {
     class MapDao {
 
         public static List<List<ChunkType>> LoadMap(int level) {
-            StreamReader mapReader = new StreamReader("View/files/map" + level + ".txt");
+            StreamReader mapReader = new StreamReader("files/map" + level + ".txt");
             var mapChunks = new List<List<ChunkType>>();
             string line;
             while ((line = mapReader.ReadLine()) != null) {

@@ -6,10 +6,9 @@ namespace EscapeGame {
         private MapView mapView;
         public int Level { get; set; }
 
-        public MapController() {
+        public MapController(int level) {
             mapView = new MapView();
-            Level = 1;
-            LoadMap();
+            LoadMap(level);
         }
 
         public bool IsFreeChunk(int x, int y) {
@@ -20,8 +19,20 @@ namespace EscapeGame {
             return MapChunks[y][x].Equals(ChunkType.Itembox);
         }
 
-        public void LoadMap() {
-            MapChunks = MapDao.LoadMap(Level);
+        public bool IsOpponentChunk(int x, int y) {
+            return MapChunks[y][x].Equals(ChunkType.Opponnent);
+        }
+
+        public bool IsGateChunk(int x, int y) {
+            return MapChunks[y][x].Equals(ChunkType.Gate);
+        }
+
+        public bool IsBossChunk(int x, int y) {
+            return MapChunks[y][x].Equals(ChunkType.Boss);
+        }
+
+        public void LoadMap(int level) {
+            MapChunks = MapDao.LoadMap(level);
         }
         
         public void nextLevel() {
