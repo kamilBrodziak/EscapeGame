@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace EscapeGame.View {
     public class InventoryView {
-        public void printInventory(Dictionary<ItemType, Item> equiped, Item[] items,
+        public void printInventory(Dictionary<ItemType, Item> equiped, Item[] items, bool hasKey,
             int baseDefence, int baseAttack, int baseVisibility, int cursorPos) {
             Console.Clear();
             int helmet = equiped[ItemType.Helmet] != null ? equiped[ItemType.Helmet].Stat : 0;
@@ -15,7 +15,7 @@ namespace EscapeGame.View {
             int light = equiped[ItemType.Light] != null ? equiped[ItemType.Light].Stat : 0;
             int defence = helmet + shoulder + gloves + chest + boots + baseDefence;
             int attack = sword + baseAttack;
-            int visiblitiy = light + baseVisibility;
+            int visiblity = light + baseVisibility;
             string helmetStr = $" Helmet: {helmet} ",
                 shoulderStr = $" Shoulder: {shoulder} ",
                 glovesStr = $" Gloves: {gloves} ",
@@ -25,7 +25,8 @@ namespace EscapeGame.View {
                 lightStr = $" Light: {light} ",
                 defenceStr = $" Defence: {defence} ",
                 attackStr = $" Attack: {attack} ",
-                visibilityStr = $" Visibility: {visiblitiy} ";
+                visibilityStr = $" Visibility: {visiblity} ",
+                hasKeyStr = $" Key: {hasKey}";
 
             Console.WriteLine(new String('█', 100));
             Console.WriteLine(new String('█', 100));
@@ -36,7 +37,7 @@ namespace EscapeGame.View {
             Console.WriteLine($"██   {bootsStr}{new String(' ', 22 - bootsStr.Length)}█" +
                 $"{swordStr}{new String(' ', 22 - swordStr.Length)}█" +
                 $"{lightStr}{new String(' ', 22 - lightStr.Length)}█" +
-                $"{new String(' ', 21)}   ██");
+                $"{hasKeyStr}{new String(' ', 21 - hasKeyStr.Length)}   ██");
 
             Console.WriteLine(new String('█', 100));
             Console.WriteLine($"██   {defenceStr}{new String(' ', 29 - defenceStr.Length)}█" +

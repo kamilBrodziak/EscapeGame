@@ -20,7 +20,7 @@ namespace EscapeGame.Controller {
             bool printInv = true;
             List<Item> items = inventory.Items.Values.ToList();
             Item[] itemsToPrint = items.Take(Math.Min(items.Count, printItemCount)).ToArray();
-            inventoryView.printInventory(inventory.EquipedItems, itemsToPrint,
+            inventoryView.printInventory(inventory.EquipedItems, itemsToPrint, inventory.HasKey,
                         10, 10, 5, Math.Min(cursorPos, printItemCount - 1));
             while (!(key = Console.ReadKey().Key).Equals(ConsoleKey.I)) {
                 printInv = true;
@@ -48,7 +48,7 @@ namespace EscapeGame.Controller {
                     } else {
                         itemsToPrint = items.Take(printItemCount).ToArray();
                     }
-                    inventoryView.printInventory(inventory.EquipedItems, itemsToPrint,
+                    inventoryView.printInventory(inventory.EquipedItems, itemsToPrint, inventory.HasKey,
                         10, 10, 5, Math.Min(cursorPos, printItemCount - 1));
                 }
             }

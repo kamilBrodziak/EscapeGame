@@ -6,6 +6,7 @@ namespace EscapeGame {
     public class Inventory {
         public Dictionary<int, Item> Items { get; set; }
         public Dictionary<ItemType, Item> EquipedItems { get; set; }
+        public bool HasKey { get; set; }
 
         public Inventory() {
             Items = new Dictionary<int, Item>();
@@ -17,6 +18,7 @@ namespace EscapeGame {
             EquipedItems[ItemType.Boots] = null;
             EquipedItems[ItemType.Light] = null;
             EquipedItems[ItemType.Sword] = null;
+            HasKey = false;
         }
 
         public void AddItem(Item item) {
