@@ -1,4 +1,6 @@
-﻿using System;
+﻿using EscapeGame.DAO;
+using EscapeGame.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

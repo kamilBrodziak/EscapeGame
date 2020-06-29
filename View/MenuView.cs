@@ -18,22 +18,22 @@ namespace EscapeGame {
         }
 
         public void PrintMenuOption(string text, bool isChosen = false) {
-            Console.WriteLine(new String('█', 30));
+            Console.WriteLine(new String('█', 50));
             if (isChosen)
-                Console.WriteLine(new String('█', 30));
+                Console.WriteLine("██████" + new String(' ', 38) + "██████");
             else
-                Console.WriteLine('█' + new String(' ', 28) + '█');
+                Console.WriteLine('█' + new String(' ', 48) + '█');
             if (isChosen)
-                Console.WriteLine(new String('█', (int)Math.Floor((26 - text.Length) / 2.0)) + "  " + text + "  " +
-                    new String('█', (int)Math.Ceiling((26 - text.Length) / 2.0)));
+                Console.WriteLine("██████" + new String(' ', (int)Math.Floor((38 - text.Length) / 2.0)) + text +
+                    new String(' ', (int)Math.Ceiling((38 - text.Length) / 2.0)) + "██████");
             else
-                Console.WriteLine('█' + new String(' ', (int)Math.Floor((28 - text.Length) / 2.0)) + text +
-                    new String(' ', (int)Math.Ceiling((28 - text.Length) / 2.0)) + '█');
-            if (isChosen)
-                Console.WriteLine(new String('█', 30));
+                Console.WriteLine("█" + new String(' ', (int)Math.Floor((48 - text.Length) / 2.0)) + text +
+                    new String(' ', (int)Math.Ceiling((48 - text.Length) / 2.0)) + "█");
+            if(isChosen)
+                Console.WriteLine("██████" + new String(' ', 38) + "██████");
             else
-                Console.WriteLine('█' + new String(' ', 28) + '█');
-            Console.WriteLine(new String('█', 30));
+                Console.WriteLine('█' + new String(' ', 48) + '█');
+            Console.WriteLine(new String('█', 50));
             Console.WriteLine();
         }
 

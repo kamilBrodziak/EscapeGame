@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using EscapeGame.Model;
+using System.Collections.Generic;
 using System.IO;
 
-namespace EscapeGame {
+namespace EscapeGame.DAO {
     public class ItemsDAO {
         public static Dictionary<int, Item> LoadItems() {
             Dictionary<int, Item> items = new Dictionary<int, Item>();

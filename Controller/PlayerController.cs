@@ -1,6 +1,6 @@
-﻿using System;
+﻿using EscapeGame.Model;
 
-namespace EscapeGame {
+namespace EscapeGame.Controller {
     public class PlayerController {
         public Player Player { get; set; }
 

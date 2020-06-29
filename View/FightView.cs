@@ -31,30 +31,28 @@ namespace EscapeGame.View {
         }
 
         private void printAnswers(int playerAnswer, string answer1, string answer2) {
-            int answer1BoxLength = 43, answer2BoxLength = 43;
+            int answer1BoxLength = 45, answer2BoxLength = 45;
             string answer1Border = "█", answer2Border = "█";
-            if(playerAnswer == 1) {
-                answer1BoxLength = 39;
-                answer1Border = "███";
-            } else if(playerAnswer == 2) {
-                answer2BoxLength = 39;
-                answer2Border = "███";
-            }
-            int answer1LeftTextLength = (int)Math.Floor((answer1BoxLength - answer1.Length) / 2.0),
-                answer1RightTextLength = (int)Math.Ceiling((answer1BoxLength - answer1.Length) / 2.0),
-                answer2LeftTextLength = (int)Math.Floor((answer2BoxLength - answer2.Length) / 2.0),
-                answer2RightTextLength = (int)Math.Ceiling((answer2BoxLength - answer2.Length) / 2.0);
+            if(playerAnswer == 1)
+                answer1Border = "██████";
+            else if(playerAnswer == 2)
+                answer2Border = "██████";
 
-            Console.WriteLine($"{new String('█', 45)}{new String(' ', 10)}{new String('█', 45)}");
-            Console.WriteLine($"{answer1Border}{new String(' ', answer1BoxLength)}{answer1Border}" + 
-                $"{new String(' ', 10)}{answer2Border}{new String(' ', answer2BoxLength)}{answer2Border}");
+            int answer1LeftTextLength = (int)Math.Floor((answer1BoxLength - answer1.Length) / 2.0) - answer1Border.Length,
+                answer1RightTextLength = (int)Math.Ceiling((answer1BoxLength - answer1.Length) / 2.0) - answer1Border.Length,
+                answer2LeftTextLength = (int)Math.Floor((answer2BoxLength - answer2.Length) / 2.0) - answer2Border.Length,
+                answer2RightTextLength = (int)Math.Ceiling((answer2BoxLength - answer2.Length) / 2.0) - answer2Border.Length;
+
+            Console.WriteLine($"{new String('█', answer1BoxLength)}{new String(' ', 10)}{new String('█', answer2BoxLength)}");
+            Console.WriteLine($"{answer1Border}{new String(' ', answer1BoxLength - 2 * answer1Border.Length)}{answer1Border}" + 
+                $"{new String(' ', 10)}{answer2Border}{new String(' ', answer2BoxLength - 2 * answer2Border.Length)}{answer2Border}");
             Console.WriteLine($"{answer1Border}{new String(' ', answer1LeftTextLength)}" +
                 $"{answer1}{new String(' ', answer1RightTextLength)}{answer1Border}" +
                 $"{new String(' ', 10)}{answer2Border}{new String(' ', answer2LeftTextLength)}" +
                 $"{answer2}{new String(' ', answer2RightTextLength)}{answer2Border}");
-            Console.WriteLine($"{answer1Border}{new String(' ', answer1BoxLength)}{answer1Border}" +
-                $"{new String(' ', 10)}{answer2Border}{new String(' ', answer2BoxLength)}{answer2Border}");
-            Console.WriteLine($"{new String('█', 45)}{new String(' ', 10)}{new String('█', 45)}");
+            Console.WriteLine($"{answer1Border}{new String(' ', answer1BoxLength - 2 * answer1Border.Length)}{answer1Border}" +
+                $"{new String(' ', 10)}{answer2Border}{new String(' ', answer2BoxLength - 2 * answer2Border.Length)}{answer2Border}");
+            Console.WriteLine($"{new String('█', answer1BoxLength)}{new String(' ', 10)}{new String('█', answer2BoxLength)}");
         }
    
         public void PrintResult(bool isPlayerAttack, int attack, int defense, int damage) {

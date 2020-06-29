@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
 
-namespace EscapeGame {
+namespace EscapeGame.Model {
     public class Inventory {
         public Dictionary<int, Item> Items { get; set; }
         public Dictionary<ItemType, Item> EquipedItems { get; set; }

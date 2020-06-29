@@ -1,4 +1,5 @@
-﻿using EscapeGame.View;
+﻿using EscapeGame.Model;
+using EscapeGame.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,10 +31,15 @@ namespace EscapeGame.Controller {
                         cursorPos = changeCursorPos(++cursorPos);
                         break;
                     case ConsoleKey.Enter:
-                        EquipItem(playerController, items, ref cursorPos);
+                        if (playerController.Player.Inventory.Items.Count > 0) {
+                            EquipItem(playerController, items, ref cursorPos);
+                            items = inventory.Items.Values.ToList();
+                        } else
+                            continue;
                         break;
                     default:
                         continue;
+
                 }
                 if(cursorPos > printItemCount - 1) {
                     itemsToPrint = items.Skip(cursorPos - printItemCount + 1).Take(printItemCount).ToArray();
@@ -42,6 +48,7 @@ namespace EscapeGame.Controller {
                 }
                 inventoryView.printInventory(inventory.EquipedItems, itemsToPrint, inventory.HasKey,
                     playerController.Player, Math.Min(cursorPos, printItemCount - 1));
+
             }
         }
 
@@ -56,7 +63,7 @@ namespace EscapeGame.Controller {
                 playerController.CalculateDefence();
             }
             items = inventory.Items.Values.ToList();
-            if (inventory.Items.Count == cursorPos) {
+            if (inventory.Items.Count == cursorPos && cursorPos != 0) {
                 cursorPos--;
             }
         }

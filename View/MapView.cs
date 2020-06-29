@@ -1,8 +1,9 @@
-﻿using System;
+﻿using EscapeGame.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EscapeGame {
+namespace EscapeGame.View {
     public class MapView {
         public void RenderMap(int playerPosX, int playerPosY, int radius, in List<List<ChunkType>> mapChunks) {
             Console.Clear();

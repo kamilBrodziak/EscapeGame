@@ -1,4 +1,4 @@
-﻿namespace EscapeGame {
+﻿namespace EscapeGame.Model {
     public enum ChunkType {
         Wall = '█',
         Opponnent = 'O',

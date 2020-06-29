@@ -1,4 +1,5 @@
 using EscapeGame.Controller;
+using EscapeGame.Model;
 using EscapeGame.View;
 using System;
 
@@ -33,10 +34,10 @@ namespace EscapeGame {
 
 
         public void Launch() {
-            gameResultView.DisplayGameResult(StartGame());
+            gameResultView.DisplayGameResult(StartGame() == Result.Win);
         }
 
-        public bool StartGame() {
+        public Result StartGame() {
             ConsoleKey key;
             level = 0;
             int newPlayerPosX, newPlayerPosY;
@@ -44,7 +45,7 @@ namespace EscapeGame {
             while (!(key = Console.ReadKey().Key).Equals(ConsoleKey.Escape)) {
                 newPlayerPosX = playerController.Player.PosX;
                 newPlayerPosY = playerController.Player.PosY;
-                bool madeMove = true;
+                bool madeMove = true, invOpened = false;
 
                 switch(key) {
                     case ConsoleKey.LeftArrow:
@@ -62,6 +63,7 @@ namespace EscapeGame {
                     case ConsoleKey.I:
                         inventoryController.OpenInventory(playerController);
                         madeMove = false;
+                        invOpened = true;
                         break;
                     case ConsoleKey.D9:
                         Cheat();
@@ -75,12 +77,14 @@ namespace EscapeGame {
                 if(madeMove && !mapController.isWallChunk(newPlayerPosX, newPlayerPosY)) {
                     Result result = PerformAction(newPlayerPosX, newPlayerPosY);
                     if(result != Result.Continue) {
-                        return result == Result.Win;
+                        return result;
                     }
+                    mapController.RenderMap(playerController.Player);
+                } else if(invOpened) {
                     mapController.RenderMap(playerController.Player);
                 }
             }
-            return false;
+            return Result.Lost;
         }
 
         private Result PerformAction(int newPlayerPosX, int newPlayerPosY) {

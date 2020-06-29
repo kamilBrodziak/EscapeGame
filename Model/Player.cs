@@ -1,4 +1,4 @@
-namespace EscapeGame {
+namespace EscapeGame.Model {
 
     public class Player {
         public int PosX { get; set; }

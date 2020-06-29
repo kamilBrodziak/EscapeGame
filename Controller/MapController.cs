@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using EscapeGame.DAO;
+using EscapeGame.Model;
+using EscapeGame.View;
+using System.Collections.Generic;
 
-namespace EscapeGame {
+namespace EscapeGame.Controller {
     class MapController {
         public List<List<ChunkType>> MapChunks { get; set; }
         private MapView mapView;

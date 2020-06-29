@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EscapeGame.Model;
+using System;
 using System.Collections.Generic;
 
 namespace EscapeGame.View {

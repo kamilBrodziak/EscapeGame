@@ -1,5 +1,5 @@
 ﻿
-namespace EscapeGame {
+namespace EscapeGame.Model {
     public enum ItemType {
         Helmet,
         Chest,

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using EscapeGame.Model;
+using System.Collections.Generic;
 using System.IO;
 
-namespace EscapeGame {
+namespace EscapeGame.DAO {
     class MapDao {
 
         public static List<List<ChunkType>> LoadMap(int level) {
