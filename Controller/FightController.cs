@@ -61,11 +61,11 @@ namespace EscapeGame.Controller {
                 }
                 int defence, attack, damage;
                 if (question.ProperAnswer == playerAnswer) {
-                    defence = playerController.Player.Defence;
-                    attack = opponentController.GenerateAttack();
+                    defence = opponentController.Opponent.Defence;
+                    attack = playerController.GenerateAttack();
                     damage = opponentController.ReceiveDamage(attack);
                 } else {
-                    defence = opponentController.Opponent.Defence;
+                    defence = playerController.Player.Defence;
                     attack = opponentController.GenerateAttack();
                     damage = playerController.ReceiveDamage(attack);
                 }

@@ -14,7 +14,7 @@ namespace EscapeGame.Controller {
         public Item GetRandomItem() {
             Random rnd = new Random();
 
-            Item item = items[rnd.Next(0, items.Count)];
+            Item item = items.Values.ToArray()[rnd.Next(0, items.Count)];
             items.Remove(item.ID);
             return item;
         }

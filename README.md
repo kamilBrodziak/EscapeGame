@@ -36,6 +36,7 @@ All rules are described below and in menu tutorial option.
             You can open and close inventory by pressing I key.
             You can navigate through inventory items by pressing up/down arrow keys.
             If you want to equip some item, select it and press Enter
+            If you want to cheat - press 9, you will get key, 1000 hp, defence, light and attack
             
         ITEMS:
             Sword - increase your attack.

@@ -87,6 +87,7 @@ namespace EscapeGame {
                         playerController.MakeMove(newPlayerPosX, newPlayerPosY);
                         bool playerWin = fightController.StartFight(level, true);
                         if (playerWin) {
+                            mapController.SetChunk(newPlayerPosX, newPlayerPosY, ChunkType.Floor);
                             playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
                             playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
                             playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
@@ -97,10 +98,10 @@ namespace EscapeGame {
                         }
                     } else if (mapController.IsGateChunk(newPlayerPosX, newPlayerPosY)) {
                         if(playerController.HasKey()) {
-                            playerController.KeyUsed();
                             bool canPass = levelGamesController.RunMiniGame(level);
                             if(canPass) {
-                                if(level == 2) {
+                                playerController.KeyUsed();
+                                if (level == 2) {
                                     return true;
                                 }
                                 mapController.LoadMap(++level);

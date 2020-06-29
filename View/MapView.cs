@@ -1,22 +1,21 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 
 namespace EscapeGame {
     public class MapView {
-        public void RenderMap(int playerPosX, int playerPosY, int radius, List<List<ChunkType>> mapChunks) {
+        public void RenderMap(int playerPosX, int playerPosY, int radius, in List<List<ChunkType>> mapChunks) {
             Console.Clear();
-            for(int i = Math.Max(0, playerPosY - radius); i < Math.Min(mapChunks.Count, playerPosY + radius); ++i) {
-                for(int j = Math.Max(0, playerPosX - 2 * radius); 
-                    j < Math.Min(mapChunks[i].Count, playerPosX + 2 * radius); ++j) {
-                    if(i == playerPosY && j == playerPosX) {
-                        Console.Write((char)ChunkType.Player);
-                    } else {
-                        Console.Write((char)mapChunks[i][j]);
-                    }
-                }
-                Console.WriteLine();
+            string[] mapView = mapChunks.Select(i => String.Join("", i.Select(j => (char)j))).ToArray();
+            char[] line = mapView[playerPosY].ToCharArray();
+            line[playerPosX] = (char)ChunkType.Player;
+            mapView[playerPosY] = new string(line);
+            int lineXStart = Math.Max(0, playerPosX - 2 * radius),
+                lineXLength = Math.Min(mapView[0].Length, playerPosX + 2 * radius),
+                lineYStart = Math.Max(0, playerPosY - radius),
+                lineYLength = Math.Min(mapView.Length, playerPosY + radius);
+            for (int i = lineYStart; i < lineYLength; ++i) {
+                Console.WriteLine(mapView[i].Substring(lineXStart, lineXLength));
             }
         }
     }

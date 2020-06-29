@@ -9,6 +9,7 @@ namespace EscapeGame.View {
 
         public void DisplayGameResult(bool isWin) {
             StreamReader sr;
+            Console.Clear();
             if(isWin) {
                 sr = new StreamReader("files/won.txt");
             } else {
