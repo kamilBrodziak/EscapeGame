@@ -45,7 +45,7 @@ namespace EscapeGame {
             while (!(key = Console.ReadKey().Key).Equals(ConsoleKey.Escape)) {
                 newPlayerPosX = playerController.Player.PosX;
                 newPlayerPosY = playerController.Player.PosY;
-                bool madeMove = true, invOpened = false;
+                bool madeMove = true, renderMap = false;
 
                 switch(key) {
                     case ConsoleKey.LeftArrow:
@@ -63,15 +63,15 @@ namespace EscapeGame {
                     case ConsoleKey.I:
                         inventoryController.OpenInventory(playerController);
                         madeMove = false;
-                        invOpened = true;
+                        renderMap = true;
                         break;
                     case ConsoleKey.D9:
                         Cheat();
                         madeMove = false;
+                        renderMap = true;
                         break;
                     default:
-                        madeMove = false;
-                        break;
+                        continue;
                 }
                 
                 if(madeMove && !mapController.isWallChunk(newPlayerPosX, newPlayerPosY)) {
@@ -80,7 +80,7 @@ namespace EscapeGame {
                         return result;
                     }
                     mapController.RenderMap(playerController.Player);
-                } else if(invOpened) {
+                } else if(renderMap) {
                     mapController.RenderMap(playerController.Player);
                 }
             }
@@ -88,15 +88,18 @@ namespace EscapeGame {
         }
 
         private Result PerformAction(int newPlayerPosX, int newPlayerPosY) {
-            playerController.MakeMove(newPlayerPosX, newPlayerPosY);
+            if(mapController.IsFreeChunk(newPlayerPosX, newPlayerPosY) ||
+                mapController.IsItemBoxChunk(newPlayerPosX, newPlayerPosY)) {
+                playerController.MakeMove(newPlayerPosX, newPlayerPosY);
+            }
             if (mapController.IsItemBoxChunk(newPlayerPosX, newPlayerPosY)) {
                 return ItemboxAction(newPlayerPosX, newPlayerPosY);
             } else if (mapController.IsOpponentChunk(newPlayerPosX, newPlayerPosY)) {
                 return FightOpponentAction(newPlayerPosX, newPlayerPosY);
             } else if (mapController.IsBossChunk(newPlayerPosX, newPlayerPosY)) {
-                FightBossAction(newPlayerPosX, newPlayerPosY);
+                return FightBossAction(newPlayerPosX, newPlayerPosY);
             } else if (mapController.IsGateChunk(newPlayerPosX, newPlayerPosY)) {
-                GateAction();
+                return GateAction();
             }
             return Result.Continue;
         }
@@ -161,6 +164,21 @@ namespace EscapeGame {
             playerController.CalculateAttack();
             playerController.CalculateDefence();
             playerController.CalculateVisibility();
+            switch(level) {
+                case 0:
+                    playerController.Player.PosX = 119;
+                    playerController.Player.PosY = 7;
+                    break;
+                case 1:
+                    playerController.Player.PosX = 118;
+                    playerController.Player.PosY = 21;
+                    break;
+                case 2:
+                    playerController.Player.PosX = 119;
+                    playerController.Player.PosY = 28;
+                    break;
+            }
+            
         }
 
     }

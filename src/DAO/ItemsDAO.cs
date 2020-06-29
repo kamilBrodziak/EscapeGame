@@ -6,7 +6,7 @@ namespace EscapeGame.DAO {
     public class ItemsDAO {
         public static Dictionary<int, Item> LoadItems() {
             Dictionary<int, Item> items = new Dictionary<int, Item>();
-            StreamReader sr = new StreamReader("files/items.txt");
+            StreamReader sr = new StreamReader("src/files/items.txt");
             string line;
 
             while ((line = sr.ReadLine()) != null) {

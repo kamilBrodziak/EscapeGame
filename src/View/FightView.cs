@@ -2,7 +2,7 @@
 using System;
 namespace EscapeGame.View {
     class FightView {
-        public void printFight(int playerAnswer, Question question, Player player, Opponent opponent) {
+        public void PrintFight(int playerAnswer, Question question, Player player, Opponent opponent) {
             Console.Clear();
             Console.WriteLine(new String('█', 100));
 
@@ -14,23 +14,23 @@ namespace EscapeGame.View {
             Console.WriteLine();
             if (playerAnswer < 2) {
                 int whichAnswer = playerAnswer == 0 ? 1 : 2;
-                printAnswers(whichAnswer, question.Answers[0], question.Answers[1]);
+                PrintAnswers(whichAnswer, question.Answers[0], question.Answers[1]);
                 Console.WriteLine();
-                printAnswers(0, question.Answers[2], question.Answers[3]);
+                PrintAnswers(0, question.Answers[2], question.Answers[3]);
             } else {
                 int whichAnswer = playerAnswer == 2 ? 1 : 2;
-                printAnswers(0, question.Answers[0], question.Answers[1]);
+                PrintAnswers(0, question.Answers[0], question.Answers[1]);
                 Console.WriteLine();
-                printAnswers(whichAnswer, question.Answers[2], question.Answers[3]);
+                PrintAnswers(whichAnswer, question.Answers[2], question.Answers[3]);
             }
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
-            printAnswers(0, $"Your health: {player.Health}", $"Opponent health: {opponent.Health}");
+            PrintAnswers(0, $"Your health: {player.Health}", $"Opponent health: {opponent.Health}");
         }
 
-        private void printAnswers(int playerAnswer, string answer1, string answer2) {
+        private void PrintAnswers(int playerAnswer, string answer1, string answer2) {
             int answer1BoxLength = 45, answer2BoxLength = 45;
             string answer1Border = "█", answer2Border = "█";
             if(playerAnswer == 1)
@@ -54,8 +54,17 @@ namespace EscapeGame.View {
                 $"{new String(' ', 10)}{answer2Border}{new String(' ', answer2BoxLength - 2 * answer2Border.Length)}{answer2Border}");
             Console.WriteLine($"{new String('█', answer1BoxLength)}{new String(' ', 10)}{new String('█', answer2BoxLength)}");
         }
+
+        public void PrintResult(bool isPlayerWin) {
+            if(isPlayerWin) {
+                Console.WriteLine("You won! Check what item you got!");
+            } else {
+                Console.WriteLine("You lost! Come back later.");
+            }
+            System.Threading.Thread.Sleep(4000);
+        }
    
-        public void PrintResult(bool isPlayerAttack, int attack, int defense, int damage) {
+        public void PrintStrikeResult(bool isPlayerAttack, int attack, int defense, int damage) {
             if (isPlayerAttack) {
                 Console.WriteLine("Correct answer! You attacked opponent.");
                 Console.WriteLine($"You have {attack} attack points and opponent has {defense} defense points.");

@@ -63,84 +63,84 @@
     <Content Include=".idea\modules.xml" />
     <Content Include=".idea\vcs.xml" />
     <Content Include=".idea\workspace.xml" />
-    <Content Include="files\lost.txt">
+    <Content Include="src\files\lost.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\map1.txt">
+    <Content Include="src\files\map1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\map2.txt">
+    <Content Include="src\files\map2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\miniGames\hangman\0.txt">
+    <Content Include="src\files\miniGames\hangman\0.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\miniGames\hangman\1.txt">
+    <Content Include="src\files\miniGames\hangman\1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\miniGames\hangman\2.txt">
+    <Content Include="src\files\miniGames\hangman\2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\miniGames\hangman\3.txt">
+    <Content Include="src\files\miniGames\hangman\3.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\miniGames\hangman\4.txt">
+    <Content Include="src\files\miniGames\hangman\4.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\miniGames\hangman\5.txt">
+    <Content Include="src\files\miniGames\hangman\5.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\miniGames\hangman\6.txt">
+    <Content Include="src\files\miniGames\hangman\6.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\miniGames\hangman\logo.txt">
+    <Content Include="src\files\miniGames\hangman\logo.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\miniGames\hangman\riddles.txt">
+    <Content Include="src\files\miniGames\hangman\riddles.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\questions.txt">
+    <Content Include="src\files\questions.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\items.txt">
+    <Content Include="src\files\items.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\map0.txt">
+    <Content Include="src\files\map0.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="files\won.txt">
+    <Content Include="src\files\won.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\FightController.cs" />
-    <Compile Include="Controller\GameController.cs" />
-    <Compile Include="Controller\InventoryController.cs" />
-    <Compile Include="Controller\ItemsController.cs" />
-    <Compile Include="Controller\LevelGamesController.cs" />
-    <Compile Include="Controller\MainController.cs" />
-    <Compile Include="Controller\MapController.cs" />
-    <Compile Include="Controller\OpponentController.cs" />
-    <Compile Include="Controller\PlayerController.cs" />
-    <Compile Include="Controller\QuestionController.cs" />
-    <Compile Include="DAO\ItemsDAO.cs" />
-    <Compile Include="DAO\LevelGamesDAO.cs" />
-    <Compile Include="DAO\MapDao.cs" />
-    <Compile Include="DAO\QuestionsDao.cs" />
-    <Compile Include="Model\ItemType.cs" />
-    <Compile Include="Model\Inventory.cs" />
-    <Compile Include="Model\Item.cs" />
-    <Compile Include="Model\ChunkType.cs" />
-    <Compile Include="Model\Opponent.cs" />
-    <Compile Include="Model\Player.cs" />
-    <Compile Include="Model\Question.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="View\FightView.cs" />
-    <Compile Include="View\GameResultView.cs" />
-    <Compile Include="View\InventoryView.cs" />
-    <Compile Include="View\LevelGamesView.cs" />
-    <Compile Include="View\MapView.cs" />
-    <Compile Include="View\MenuView.cs" />
+    <Compile Include="src\Controller\FightController.cs" />
+    <Compile Include="src\Controller\GameController.cs" />
+    <Compile Include="src\Controller\InventoryController.cs" />
+    <Compile Include="src\Controller\ItemsController.cs" />
+    <Compile Include="src\Controller\LevelGamesController.cs" />
+    <Compile Include="src\Controller\MainController.cs" />
+    <Compile Include="src\Controller\MapController.cs" />
+    <Compile Include="src\Controller\OpponentController.cs" />
+    <Compile Include="src\Controller\PlayerController.cs" />
+    <Compile Include="src\Controller\QuestionController.cs" />
+    <Compile Include="src\DAO\ItemsDAO.cs" />
+    <Compile Include="src\DAO\LevelGamesDAO.cs" />
+    <Compile Include="src\DAO\MapDao.cs" />
+    <Compile Include="src\DAO\QuestionsDao.cs" />
+    <Compile Include="src\Model\ItemType.cs" />
+    <Compile Include="src\Model\Inventory.cs" />
+    <Compile Include="src\Model\Item.cs" />
+    <Compile Include="src\Model\ChunkType.cs" />
+    <Compile Include="src\Model\Opponent.cs" />
+    <Compile Include="src\Model\Player.cs" />
+    <Compile Include="src\Model\Question.cs" />
+    <Compile Include="src\Program.cs" />
+    <Compile Include="src\View\FightView.cs" />
+    <Compile Include="src\View\GameResultView.cs" />
+    <Compile Include="src\View\InventoryView.cs" />
+    <Compile Include="src\View\LevelGamesView.cs" />
+    <Compile Include="src\View\MapView.cs" />
+    <Compile Include="src\View\MenuView.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".git\COMMIT_EDITMSG" />

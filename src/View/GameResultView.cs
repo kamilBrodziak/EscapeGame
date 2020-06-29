@@ -8,9 +8,9 @@ namespace EscapeGame.View {
             StreamReader sr;
             Console.Clear();
             if(isWin) {
-                sr = new StreamReader("files/won.txt");
+                sr = new StreamReader("src/files/won.txt");
             } else {
-                sr = new StreamReader("files/lost.txt");
+                sr = new StreamReader("src/files/lost.txt");
             }
 
             while(!sr.EndOfStream) {

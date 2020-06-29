@@ -11,8 +11,8 @@ namespace EscapeGame.View {
             char[] line = mapView[playerPosY].ToCharArray();
             line[playerPosX] = (char)ChunkType.Player;
             mapView[playerPosY] = new string(line);
-            int lineXStart = Math.Max(0, playerPosX - 2 * radius),
-                lineXLength = Math.Min(mapView[0].Length, playerPosX + 2 * radius),
+            int lineXStart = Math.Max(0, playerPosX - radius),
+                lineXLength = Math.Min(mapView[0].Length, 4 *  radius),
                 lineYStart = Math.Max(0, playerPosY - radius),
                 lineYLength = Math.Min(mapView.Length, playerPosY + radius);
             for (int i = lineYStart; i < lineYLength; ++i) {

@@ -21,14 +21,14 @@ namespace EscapeGame.Controller {
             opponentController.generateNewOpponent(level, isBoss);
             while(playerController.Player.Health > 0 && opponentController.Opponent.Health > 0) {
                 question = questionController.GetRandomQuestion();
-                fightView.printFight(0, question, playerController.Player, opponentController.Opponent);
-                performAttack(question.ProperAnswer == chooseAnswer(question));
+                fightView.PrintFight(0, question, playerController.Player, opponentController.Opponent);
+                PerformAttack(question.ProperAnswer == ChooseAnswer(question));
             }
-
+            fightView.PrintResult(playerController.Player.Health > 0);
             return playerController.Player.Health > 0;
         }
 
-        private int chooseAnswer(Question question) {
+        private int ChooseAnswer(Question question) {
             int playerAnswer = 0;
             ConsoleKey key;
             while (!(key = Console.ReadKey().Key).Equals(ConsoleKey.Enter)) {
@@ -50,13 +50,13 @@ namespace EscapeGame.Controller {
                         playerAnswer += 2;
                         break;
                 }
-                fightView.printFight(playerAnswer, question, playerController.Player, opponentController.Opponent);
+                fightView.PrintFight(playerAnswer, question, playerController.Player, opponentController.Opponent);
             }
             return playerAnswer;
         }
 
 
-        private void performAttack(bool isPlayerAttack) {
+        private void PerformAttack(bool isPlayerAttack) {
             int defence, attack, damage;
             if (isPlayerAttack) {
                 defence = opponentController.Opponent.Defence;
@@ -67,7 +67,7 @@ namespace EscapeGame.Controller {
                 attack = opponentController.GenerateAttack();
                 damage = playerController.ReceiveDamage(attack);
             }
-            fightView.PrintResult(isPlayerAttack, attack, defence, damage);
+            fightView.PrintStrikeResult(isPlayerAttack, attack, defence, damage);
         }
 
     }

@@ -7,10 +7,11 @@ namespace EscapeGame.DAO {
 
         public static List<Question> LoadQuestions() {
             List <Question> questions = new List<Question>();
-            StreamReader sr = new StreamReader("files/questions.txt");
+            StreamReader sr = new StreamReader("src/files/questions.txt");
             string line;
 
-            while ((line = sr.ReadLine()) != null) {
+            while (!sr.EndOfStream) {
+                line = sr.ReadLine();
                 string[] properties = line.Split(';');
                 string questionText = properties[0];
                 int properAnswer = int.Parse(properties[1]);

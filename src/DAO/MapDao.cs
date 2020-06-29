@@ -6,10 +6,11 @@ namespace EscapeGame.DAO {
     class MapDao {
 
         public static List<List<ChunkType>> LoadMap(int level) {
-            StreamReader mapReader = new StreamReader("files/map" + level + ".txt");
+            StreamReader mapReader = new StreamReader("src/files/map" + level + ".txt");
             var mapChunks = new List<List<ChunkType>>();
             string line;
-            while ((line = mapReader.ReadLine()) != null) {
+            while (!mapReader.EndOfStream) {
+                line = mapReader.ReadLine();
                 List<ChunkType> chunksLine = new List<ChunkType>();
                 foreach (char c in line) {
                     switch (c) {

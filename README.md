@@ -37,7 +37,7 @@ Please run window in full screen.
             You can open and close inventory by pressing I key.
             You can navigate through inventory items by pressing up/down arrow keys.
             If you want to equip some item, select it and press Enter
-            If you want to cheat - press 9, you will get key, 1000 hp, defence, light and attack
+            
             
         ITEMS:
             Sword - increase your attack.
@@ -53,5 +53,9 @@ Please run window in full screen.
             If you want to pass to next level, you must win mini game.
             If you loose, on first two levels nothing happens.
             Last level mini game is special, if you win it, you win game, if you lose - game over.
+
+        CHEATS:
+            If you want to quickly pass through levels, type 9, you will get 1000 hp, defence and attack.
+            You will also aquire key and teleport to gate.
             
         Good luck!

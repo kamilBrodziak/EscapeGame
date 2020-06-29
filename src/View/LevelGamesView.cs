@@ -134,14 +134,14 @@ namespace EscapeGame.View {
         public void PrintHangman(int round, string riddle, char[] playerAnswerChars) {
             Console.Clear();
             PrintHangmanEntrance();
-            StreamReader srLogo = new StreamReader($"files/miniGames/hangman/logo.txt");
+            StreamReader srLogo = new StreamReader($"src/files/miniGames/hangman/logo.txt");
             while (!srLogo.EndOfStream) {
                 Console.WriteLine(srLogo.ReadLine());
             }
             Console.WriteLine();
             Console.WriteLine(riddle);
             Console.WriteLine();
-            StreamReader sr = new StreamReader($"files/miniGames/hangman/{round}.txt");
+            StreamReader sr = new StreamReader($"src/files/miniGames/hangman/{round}.txt");
             while(!sr.EndOfStream) {
                 Console.WriteLine(sr.ReadLine());
             }
