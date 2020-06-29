@@ -48,6 +48,9 @@
     <Content Include=".idea\modules.xml" />
     <Content Include=".idea\vcs.xml" />
     <Content Include=".idea\workspace.xml" />
+    <Content Include="files\lost.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="files\map1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -90,6 +93,9 @@
     <Content Include="files\map0.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="files\won.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\FightController.cs" />
@@ -115,10 +121,11 @@
     <Compile Include="Model\Question.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="View\FightView.cs" />
+    <Compile Include="View\GameResultView.cs" />
     <Compile Include="View\InventoryView.cs" />
     <Compile Include="View\LevelGamesView.cs" />
     <Compile Include="View\MapView.cs" />
-    <Compile Include="View\Menu.cs" />
+    <Compile Include="View\MenuView.cs" />
     <Compile Include="View\Stats.cs" />
   </ItemGroup>
   <ItemGroup>

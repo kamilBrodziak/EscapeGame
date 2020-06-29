@@ -1,4 +1,5 @@
 using EscapeGame.Controller;
+using EscapeGame.View;
 using System;
 
 namespace EscapeGame {
@@ -11,6 +12,7 @@ namespace EscapeGame {
         private FightController fightController;
         private LevelGamesController levelGamesController;
         private int level;
+        private GameResultView gameResultView;
 
         public GameController() {
             level = 0;
@@ -20,9 +22,15 @@ namespace EscapeGame {
             playerController = new PlayerController();
             inventoryController = new InventoryController(playerController.Player.Inventory);
             fightController = new FightController(playerController);
+            gameResultView = new GameResultView();
         }
 
-        public bool Launch() {
+
+        public void Launch() {
+            gameResultView.DisplayGameResult(StartGame());
+        }
+
+        public bool StartGame() {
             ConsoleKey key;
             level = 0;
             int playerPosX, playerPosY, newPlayerPosX, newPlayerPosY;
@@ -92,9 +100,14 @@ namespace EscapeGame {
                             playerController.KeyUsed();
                             bool canPass = levelGamesController.RunMiniGame(level);
                             if(canPass) {
+                                if(level == 2) {
+                                    return true;
+                                }
                                 mapController.LoadMap(++level);
                                 playerController.Player.PosX = 3;
                                 playerController.Player.PosY = 3;
+                            } else if(level == 2) {
+                                return false;
                             }
                         } else {
                             Console.WriteLine("You don't have a key! Defeat boss to aquire it.");
