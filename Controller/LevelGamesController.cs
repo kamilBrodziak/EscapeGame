@@ -1,14 +1,18 @@
 ﻿
+using EscapeGame.DAO;
 using EscapeGame.View;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EscapeGame.Controller {
     class LevelGamesController {
         private LevelGamesView levelGamesView { get; set; }
+        private List<string[]> hangmanRiddles;
 
         public LevelGamesController() {
             levelGamesView = new LevelGamesView();
+            hangmanRiddles = LevelGamesDAO.GetHangmanRiddles();
         }
         public bool RunMiniGame(int level) {
             switch(level) {
@@ -117,6 +121,43 @@ namespace EscapeGame.Controller {
 
 
         public bool Hangman() {
+            Random rnd = new Random();
+            string[] riddle = hangmanRiddles[rnd.Next(0, hangmanRiddles.Count)];
+            string question = riddle[0];
+            char[] riddleAnswerChars = riddle[1].ToUpper().ToCharArray();
+            char[] playerAnswerChars = new char[riddleAnswerChars.Length];
+            for(int j = 0; j < riddleAnswerChars.Length; ++j) {
+                if(riddleAnswerChars[j] == ' ') {
+                    playerAnswerChars[j] = ' ';
+                } else {
+                    playerAnswerChars[j] = '_';
+                }
+            }
+            int i = 6;
+            while (i > 0) {
+                levelGamesView.PrintHangman(i, question, playerAnswerChars);
+                string userInput = levelGamesView.GetUserInput().ToUpper();
+                bool isGuess = false;
+                if (userInput.Length > 1 || userInput.Length == 0) {
+                    levelGamesView.PrintHangmanWrongInput();
+                } else {
+                    for (int j = 0; j < riddleAnswerChars.Length; ++j) {
+                        if(riddleAnswerChars[j] == userInput[0] && playerAnswerChars[j] != userInput[0]) {
+                            playerAnswerChars[j] = userInput[0];
+                            isGuess = true;
+                        }
+                    }
+                    if(!isGuess)
+                        --i;
+                    if(Enumerable.SequenceEqual(riddleAnswerChars, playerAnswerChars)) {
+                        levelGamesView.PrintHangman(i, question, playerAnswerChars);
+                        levelGamesView.PrintHangmanResult(true);
+                        return true;
+                    }
+                }
+            }
+            levelGamesView.PrintHangman(i, question, playerAnswerChars);
+            levelGamesView.PrintHangmanResult(false);
             return false;
         }
     }

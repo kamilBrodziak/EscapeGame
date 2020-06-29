@@ -54,6 +54,33 @@
     <Content Include="files\map2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="files\miniGames\hangman\0.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\miniGames\hangman\1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\miniGames\hangman\2.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\miniGames\hangman\3.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\miniGames\hangman\4.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\miniGames\hangman\5.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\miniGames\hangman\6.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\miniGames\hangman\logo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="files\miniGames\hangman\riddles.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="files\questions.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -76,6 +103,7 @@
     <Compile Include="Controller\PlayerController.cs" />
     <Compile Include="Controller\QuestionController.cs" />
     <Compile Include="DAO\ItemsDAO.cs" />
+    <Compile Include="DAO\LevelGamesDAO.cs" />
     <Compile Include="DAO\MapDao.cs" />
     <Compile Include="DAO\QuestionsDao.cs" />
     <Compile Include="Model\ItemType.cs" />

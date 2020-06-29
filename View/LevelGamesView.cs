@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace EscapeGame.View {
     public class LevelGamesView {
@@ -114,6 +115,58 @@ namespace EscapeGame.View {
                 Console.WriteLine("Try again!");
             }
             System.Threading.Thread.Sleep(4000);
+        }
+
+
+        //
+        // HANGMAN MINI GAME
+        //
+        public void PrintHangmanEntrance() {
+            Console.WriteLine("Great job my friend! You have come so far!");
+            Console.WriteLine("Now it's time for your final test, your live forever or die now chance!");
+            Console.WriteLine("You will play hangman! I will ask you a riddle and you have 6 chances to guess all word letters.");
+            Console.WriteLine("You should provide only one letter at a time.");
+        }
+
+        public void PrintHangmanWrongInput() {
+            Console.WriteLine("You should provide only one letter at a time!");
+        }
+        public void PrintHangman(int round, string riddle, char[] playerAnswerChars) {
+            Console.Clear();
+            PrintHangmanEntrance();
+            StreamReader srLogo = new StreamReader($"files/miniGames/hangman/logo.txt");
+            while (!srLogo.EndOfStream) {
+                Console.WriteLine(srLogo.ReadLine());
+            }
+            Console.WriteLine();
+            Console.WriteLine(riddle);
+            Console.WriteLine();
+            StreamReader sr = new StreamReader($"files/miniGames/hangman/{round}.txt");
+            while(!sr.EndOfStream) {
+                Console.WriteLine(sr.ReadLine());
+            }
+
+            Console.WriteLine();
+            foreach(char c in playerAnswerChars) {
+                if(c == ' ') {
+                    Console.Write("   ");
+                } else {
+                    Console.Write($"{c} ");
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine($"You have {round} tries left!");
+        }
+
+        public void PrintHangmanResult(bool result) {
+            if(result) {
+                Console.WriteLine("Excellent job! You passed final test and now you are free!");
+                Console.WriteLine("I'm proud of you my friend!");
+            } else {
+                Console.WriteLine("Oh my dear, you lost!");
+                Console.WriteLine("Now your life is my HA HA HA!");
+            }
+            System.Threading.Thread.Sleep(3000);
         }
     }
 }
