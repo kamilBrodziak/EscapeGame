@@ -27,6 +27,10 @@ namespace EscapeGame {
             return MapChunks[y][x].Equals(ChunkType.Gate);
         }
 
+        public bool isWallChunk(int x, int y) {
+            return MapChunks[y][x].Equals(ChunkType.Wall);
+        }
+
         public bool IsBossChunk(int x, int y) {
             return MapChunks[y][x].Equals(ChunkType.Boss);
         }

@@ -22,5 +22,10 @@ namespace EscapeGame.View {
 
             System.Threading.Thread.Sleep(5000);
         }
+
+        public void NoKeyMessage() {
+            Console.WriteLine("You don't have a key! Defeat boss to aquire it.");
+            System.Threading.Thread.Sleep(1000);
+        }
     }
 }

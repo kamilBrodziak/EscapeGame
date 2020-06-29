@@ -12,6 +12,10 @@ namespace EscapeGame {
             return Player.Attack;
         }
 
+        public void renewHealth() {
+            Player.Health = 100;
+        }
+
         public int ReceiveDamage(int damage) {
             int realDamage = (Player.Defence > damage) ? 0 : damage - Player.Defence;
             Player.Health -= realDamage;

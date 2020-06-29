@@ -67,6 +67,7 @@ namespace EscapeGame.View {
                 Console.WriteLine($"Opponent has {attack} attack points and you have {defense} defense points.");
                 Console.WriteLine($"You received {damage} damage");
             }
+            System.Threading.Thread.Sleep(4000);
         }
     }
 

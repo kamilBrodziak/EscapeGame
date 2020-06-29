@@ -126,7 +126,6 @@
     <Compile Include="View\LevelGamesView.cs" />
     <Compile Include="View\MapView.cs" />
     <Compile Include="View\MenuView.cs" />
-    <Compile Include="View\Stats.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".git\COMMIT_EDITMSG" />

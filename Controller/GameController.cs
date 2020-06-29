@@ -14,6 +14,12 @@ namespace EscapeGame {
         private int level;
         private GameResultView gameResultView;
 
+        public enum Result {
+            Win,
+            Lost,
+            Continue
+        }
+
         public GameController() {
             level = 0;
             mapController = new MapController(level);
@@ -33,14 +39,12 @@ namespace EscapeGame {
         public bool StartGame() {
             ConsoleKey key;
             level = 0;
-            int playerPosX, playerPosY, newPlayerPosX, newPlayerPosY;
+            int newPlayerPosX, newPlayerPosY;
             mapController.RenderMap(playerController.Player);
             while (!(key = Console.ReadKey().Key).Equals(ConsoleKey.Escape)) {
-                playerPosX = playerController.Player.PosX;
-                playerPosY = playerController.Player.PosY;
-                newPlayerPosX = playerPosX;
-                newPlayerPosY = playerPosY;
-                bool renderMap = true;
+                newPlayerPosX = playerController.Player.PosX;
+                newPlayerPosY = playerController.Player.PosY;
+                bool madeMove = true;
 
                 switch(key) {
                     case ConsoleKey.LeftArrow:
@@ -57,75 +61,94 @@ namespace EscapeGame {
                         break;
                     case ConsoleKey.I:
                         inventoryController.OpenInventory(playerController);
+                        madeMove = false;
                         break;
                     case ConsoleKey.D9:
                         Cheat();
+                        madeMove = false;
                         break;
                     default:
-                        renderMap = false;
+                        madeMove = false;
                         break;
                 }
                 
-                if(newPlayerPosX != playerPosX || newPlayerPosY != playerPosY) {
-                    if (mapController.IsFreeChunk(newPlayerPosX, newPlayerPosY)) {
-                        playerController.MakeMove(newPlayerPosX, newPlayerPosY);
-                    } else if (mapController.IsItemBoxChunk(newPlayerPosX, newPlayerPosY)) {
-                        playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
-                        playerController.MakeMove(newPlayerPosX, newPlayerPosY);
-                        mapController.SetChunk(newPlayerPosX, newPlayerPosY, ChunkType.Floor);
-                    } else if (mapController.IsOpponentChunk(newPlayerPosX, newPlayerPosY)) {
-                        playerController.MakeMove(newPlayerPosX, newPlayerPosY);
-                        bool playerWin = fightController.StartFight(level, false);
-                        if (playerWin) {
-                            playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
-                            mapController.SetChunk(newPlayerPosX, newPlayerPosY, ChunkType.Floor);
-                        } else {
-                            
-                        }
-                        playerController.Player.Health = 100;
-                    } else if (mapController.IsBossChunk(newPlayerPosX, newPlayerPosY)) {
-                        playerController.MakeMove(newPlayerPosX, newPlayerPosY);
-                        bool playerWin = fightController.StartFight(level, true);
-                        if (playerWin) {
-                            mapController.SetChunk(newPlayerPosX, newPlayerPosY, ChunkType.Floor);
-                            playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
-                            playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
-                            playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
-                            playerController.KeyAquired();
-                            playerController.Player.Health = 100;
-                        } else {
-                            return false;
-                        }
-                    } else if (mapController.IsGateChunk(newPlayerPosX, newPlayerPosY)) {
-                        if(playerController.HasKey()) {
-                            bool canPass = levelGamesController.RunMiniGame(level);
-                            if(canPass) {
-                                playerController.KeyUsed();
-                                if (level == 2) {
-                                    return true;
-                                }
-                                mapController.LoadMap(++level);
-                                playerController.Player.PosX = 3;
-                                playerController.Player.PosY = 3;
-                            } else if(level == 2) {
-                                return false;
-                            }
-                        } else {
-                            Console.WriteLine("You don't have a key! Defeat boss to aquire it.");
-                            System.Threading.Thread.Sleep(1000);
-                        }
-                    } else {
-                        renderMap = false;
+                if(madeMove && !mapController.isWallChunk(newPlayerPosX, newPlayerPosY)) {
+                    Result result = PerformAction(newPlayerPosX, newPlayerPosY);
+                    if(result != Result.Continue) {
+                        return result == Result.Win;
                     }
-                }
-                if(renderMap) {
                     mapController.RenderMap(playerController.Player);
                 }
             }
             return false;
         }
 
-        public void Cheat() {
+        private Result PerformAction(int newPlayerPosX, int newPlayerPosY) {
+            playerController.MakeMove(newPlayerPosX, newPlayerPosY);
+            if (mapController.IsItemBoxChunk(newPlayerPosX, newPlayerPosY)) {
+                return ItemboxAction(newPlayerPosX, newPlayerPosY);
+            } else if (mapController.IsOpponentChunk(newPlayerPosX, newPlayerPosY)) {
+                return FightOpponentAction(newPlayerPosX, newPlayerPosY);
+            } else if (mapController.IsBossChunk(newPlayerPosX, newPlayerPosY)) {
+                FightBossAction(newPlayerPosX, newPlayerPosY);
+            } else if (mapController.IsGateChunk(newPlayerPosX, newPlayerPosY)) {
+                GateAction();
+            }
+            return Result.Continue;
+        }
+
+        private Result ItemboxAction(int newPlayerPosX, int newPlayerPosY) {
+            playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
+            mapController.SetChunk(newPlayerPosX, newPlayerPosY, ChunkType.Floor);
+            return Result.Continue;
+        }
+
+
+        private Result FightOpponentAction(int newPlayerPosX, int newPlayerPosY) {
+            bool playerWin = fightController.StartFight(level, false);
+            if (playerWin) {
+                playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
+                mapController.SetChunk(newPlayerPosX, newPlayerPosY, ChunkType.Floor);
+            }
+            playerController.renewHealth();
+            return Result.Continue;
+        }
+
+        private Result FightBossAction(int newPlayerPosX, int newPlayerPosY) {
+            bool playerWin = fightController.StartFight(level, true);
+            if (playerWin) {
+                mapController.SetChunk(newPlayerPosX, newPlayerPosY, ChunkType.Floor);
+                playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
+                playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
+                playerController.Player.Inventory.AddItem(itemsController.GetRandomItem());
+                playerController.KeyAquired();
+                playerController.renewHealth();
+                return Result.Continue;
+            }
+            return Result.Lost;
+        }
+
+        private Result GateAction() {
+            if (playerController.HasKey()) {
+                bool canPass = levelGamesController.RunMiniGame(level);
+                if (canPass) {
+                    playerController.KeyUsed();
+                    if (level == 2) {
+                        return Result.Win;
+                    }
+                    mapController.LoadMap(++level);
+                    playerController.Player.PosX = 3;
+                    playerController.Player.PosY = 3;
+                } else if (level == 2) {
+                    return Result.Lost;
+                }
+            }
+
+            gameResultView.NoKeyMessage();
+            return Result.Continue;
+        }
+
+        private void Cheat() {
             playerController.Player.Health = 1000;
             playerController.Player.BaseAttack = 1000;
             playerController.Player.BaseDefence = 1000;
