@@ -8,6 +8,7 @@ Each level has a different map and different gate (to another level) mini game.
 Map is represented by .txt file.
 In most of the times player can interact only by pressing keys.
 All rules are described below and in menu tutorial option.
+Please run window in full screen.
 
         Hello player!
         When you start the game, map will render.
